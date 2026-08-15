@@ -34,7 +34,7 @@ async def analyze_meeting(
     except ValueError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
     except Exception as exc:
-        raise HTTPException(status_code=500, detail=f"Transcription failed: {exc}") from exc
+        raise HTTPException(status_code=500, detail="Transcription failed.") from exc
 
     if not transcription.text:
         raise HTTPException(
@@ -48,7 +48,7 @@ async def analyze_meeting(
             detected_language=transcription.language,
         )
     except Exception as exc:
-        raise HTTPException(status_code=500, detail=f"Summarization failed: {exc}") from exc
+        raise HTTPException(status_code=500, detail="Summarization failed.") from exc
 
     return MeetingResponse(
         status="success",
@@ -80,7 +80,7 @@ async def transcribe_only(
     except ValueError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
     except Exception as exc:
-        raise HTTPException(status_code=500, detail=f"Transcription failed: {exc}") from exc
+        raise HTTPException(status_code=500, detail="Transcription failed.") from exc
 
 
 @router.get("/health", summary="Health check")
